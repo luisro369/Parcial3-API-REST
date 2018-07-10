@@ -43,7 +43,7 @@ exports.card_insert_one = (req, res, next) => {
   const card = new Card({
     _id: new mongoose.Types.ObjectId(), //esto nos creara un Id automaticamente. Por el paquete mongoose
     title: req.body.title,
-    image: req.file.path
+    image: req.file.path,
     description: req.body.description,
     _id_album: req.body._id_album,
     type: req.body.type,

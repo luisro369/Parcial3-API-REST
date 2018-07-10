@@ -2,9 +2,11 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
+
 const app = express()
 
-<<<<<<< HEAD
+app.use('./uploads', express.static('uploads'))
+
 const mongoose =require('mongoose')
 var uri = 'mongodb://adminUser1:parcial3@ds231991.mlab.com:31991/api-parcialpdm'
 
@@ -23,9 +25,6 @@ app.use(session({
 mongoose.connect(uri, { useNewUrlParser: true })
 
 
-
-=======
->>>>>>> a1667088610e7d58cee15dbb2c9145bb591b157d
 app.set('view-engine','pug')
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -34,8 +33,8 @@ app.use(bodyParser.json())
 const user = require('./routes/userRoutes.js')
 app.use('/api', user)
 
-const user = require('./routes/userRoutes.js')
-app.use('/api', user)
+const card = require('./routes/cardRoutes.js')
+app.use('/api', card)
 
 app.get('/', function(req, res){
 	res.render('loginWeb.pug', {title: "Login"})

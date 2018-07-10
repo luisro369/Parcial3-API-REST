@@ -10,10 +10,12 @@ const UPLOAD_PATH = 'uploads',
 function Uploader () {}
 
 Uploader.uploadImage = function (request, response, next) {
-	upload.single('file', uploader)
+	debugger
+	upload.single('file', Uploader.uploader)
 }
 
 Uploader.uploader = function (request, response, next) {
+	debugger
 	let fileName = request.file.originalname
 	let tempPath = request.file.path
 	let targetPath = path.join(__dirname, `..`, `./uploads/${ fileName }`)

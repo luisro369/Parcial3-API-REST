@@ -10,7 +10,7 @@ const auth = require('../middlewares/authMiddleware.js')
 
 api.post('/signup', UserControllers.signUp)
 api.post('/login', UserControllers.signIn)
-
+	
 api.get('/private', auth, (req, res) =>{
 	res.status(200).send({message: "Tienes acceso"})
 })
