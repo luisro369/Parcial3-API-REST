@@ -1,9 +1,48 @@
 'use strict'
 
+const multer = require("multer"),
+	  path = require("path"),
+	  fs = require("fs")
 
+const UPLOAD_PATH = 'uploads',
+	  upload = multer({ dest: `../${UPLOAD_PATH}/` })
 
-function uploadImage (request, response, next) {
+function Uploader () {}
 
+Uploader.uploadImage = function (request, response, next) {
+	upload.single('file', uploader)
 }
 
-module.exports = { uploadImage }
+Uploader.uploader = function (request, response, next) {
+	let fileName = request.file.originalname
+	let tempPath = request.file.path
+	let targetPath = path.join(__dirname, `..`, `./uploads/${ fileName }`)
+
+	if (path.extname(fileName).toLowerCase() === '.png' || path.extname(fileName).toLowerCase() === '.jpg' || path.extname(fileName).toLowerCase() === '.jpeg') {
+		fs.rename(tempPath, targetPath, error => {
+			if (error) {
+				console.error(`[Error]: ${ error }`)
+				return
+			}
+
+			response
+				.status(200)
+				.contentType('text/plain')
+				.end('File uploaded')
+		})
+	} else {
+		fs.unlink(tempPath, error => {
+	        if (error) { 
+	        	console.error(`[Error]: ${ error }`)
+	        	return
+	        }
+
+	        response
+	          .status(403)
+	          .contentType("text/plain")
+	          .end("Invalid image format!")
+     	})
+	}
+}
+
+module.exports = Uploader
