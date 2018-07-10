@@ -17,6 +17,7 @@ app.use(bodyParser.json())
 
 const user = require('./routes/userRoutes.js')
 app.use('/api', user)
+
 app.get('/', function(req, res){
 	res.render('loginWeb.pug', {title: "Login"})
 })
