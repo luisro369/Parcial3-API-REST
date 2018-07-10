@@ -50,30 +50,12 @@ exports.card_insert_one = (req, res, next) => {
     quality: req.body.quality
   });
 
-  // lo guarda en la base de datos. y hace log a la consola
-  card.save()
-  .then(result => {
-    console.log(result);
-    //request
-    res.status(201).json({
-      message: 'The card was stored succesfully!',
-      //mostrando la carta creada
-      createdCard: {
-        _id: result._id,
-        title: result.title,
-        image: result.image,
-        description: result.description,
-        _id_album: result._id_album,
-        type: result.type,
-        quality: result.quality
-      }
-    });
-    //error
-  }).catch(err => {
-    res.status(500).json({
-      error: err
-    });
-  });
+  card.save(function(err){
+    if(err) return res.status(500).json({error: err})      
+  })
+
+  
+
 }
 
 //DELETE a card

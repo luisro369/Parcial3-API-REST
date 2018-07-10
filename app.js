@@ -7,7 +7,20 @@ const app = express()
 const mongoose =require('mongoose')
 var uri = 'mongodb://adminUser1:parcial3@ds231991.mlab.com:31991/api-parcialpdm'
 
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
+
+app.use(session({
+  secret: 'MLL0D19T',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+
+
 mongoose.connect(uri, { useNewUrlParser: true })
+
 
 
 app.set('view-engine','pug')
