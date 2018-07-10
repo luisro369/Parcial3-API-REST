@@ -29,22 +29,11 @@ function signUp(req, res){
 
 async function signIn(req, res){
 
-	let token = await User.find({username: req.body.username}, (err, user) =>{
+	 User.findOne({username: req.body.username}, (err, user) =>{
 		if(err) return res.status(500).send({message: "Error"})
-		if(!user) return res.status(404).send({message: "Usuario no encontrado"})
-		return service.createToken(user)
+		if(!user) return res.status(404).send({message: "Usuario no encontrado"})			
+		return res.status(200).send({token: service.createToken(user._id), user: user})
 	})
-
-	let user = await User.findOne({username: req.body.username}, (err, user) =>{
-		if(err) return res.status(500).send({message: "Error"})
-		if(!user) return res.status(404).send({message: "Usuario no encontrado"})
-		return user
-	})
-
-	let jsonOut = {user: user, token: token}
-
-	res.status(200).send({jsonOut})
-
 }
 
 

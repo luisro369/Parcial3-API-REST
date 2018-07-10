@@ -4,10 +4,10 @@ const jwt = require('jwt-simple')
 const moment = require('moment')
 const confif = require('../config')
 
-function createToken(user){
+function createToken(id){
 	
 	const payload = {
-		sub: user._id,
+		sub: id,
 		iat: moment().unix(),									//creacion de token
 		exp: moment().add(14, 'days').unix()				 	//vencimiento de token 
 	}
