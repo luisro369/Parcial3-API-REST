@@ -24,8 +24,9 @@ app.use(session({
 
 mongoose.connect(uri, { useNewUrlParser: true })
 
+//var pug = require('pug')
+//app.set('view-engine',pug)
 
-app.set('view-engine','pug')
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -36,8 +37,14 @@ app.use('/api', user)
 const card = require('./routes/cardRoutes.js')
 app.use('/api', card)
 
+/*app.get('/', function(req, res){
+	res.sendFile("./WebPage/index.html")
+})*/
+
+var path = require('path')
+
 app.get('/', function(req, res){
-	res.render('loginWeb.pug', {title: "Login"})
+	res.sendFile('index.html', {root: path.join('./views/')})
 })
 
 module.exports = app

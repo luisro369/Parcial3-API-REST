@@ -9,9 +9,9 @@ const cardSchema = mongoose.Schema({
   title: {type: String, required: true},
   image: {type: String, required: true},
   description: {type: String, required: true},
-  _id_album: {type: String, required: true},
-  type: {type: String, required: true},
-  quality: {type: String, required: true}
+  game: {type: String, enum: ['Yu-Gi-Oh!', 'Magic', 'Pokemon']},
+  type: {type: String, enum: ['Monster', 'Spell', 'Gadget']},
+ quality: {type: String, enum: ['Excelent', 'Acceptable', 'Deteriorated']}
 });
 
 //esto es para exportar el Schema como un modelo. Como un modelo de objeto para ser construido

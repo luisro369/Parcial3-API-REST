@@ -27,7 +27,7 @@ function signUp(req, res){
 
 }
 
-async function signIn(req, res){
+function signIn(req, res){
 
 	 User.findOne({username: req.body.username}, (err, user) =>{
 		if(err) return res.status(500).send({message: "Error"})

@@ -5,7 +5,17 @@ const multer = require("multer"),
 	  fs = require("fs")
 
 const UPLOAD_PATH = 'uploads',
-	  upload = multer({ dest: `../${UPLOAD_PATH}/` })
+	  storage = multer.diskStorage({
+	  	destination: function(req, file, cb){
+	  		cb(null, 'uploads/')
+	  	},
+	  	filename: function(req, file, cb){
+	  		cb(null, new Date().toISOString().replace(/:/g, '-')+ file.originalname.split(" ").join(" "))
+	  	}
+	  }),
+	  upload = multer({ dest: storage })
+
+
 
 function Uploader () {}
 
