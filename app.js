@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 
+<<<<<<< HEAD
 const mongoose =require('mongoose')
 var uri = 'mongodb://adminUser1:parcial3@ds231991.mlab.com:31991/api-parcialpdm'
 
@@ -23,10 +24,15 @@ mongoose.connect(uri, { useNewUrlParser: true })
 
 
 
+=======
+>>>>>>> a1667088610e7d58cee15dbb2c9145bb591b157d
 app.set('view-engine','pug')
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+const user = require('./routes/userRoutes.js')
+app.use('/api', user)
 
 const user = require('./routes/userRoutes.js')
 app.use('/api', user)

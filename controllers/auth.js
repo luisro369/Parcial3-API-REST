@@ -33,12 +33,11 @@ function signIn(req, res){
 		if(err) return res.status(500).send({message: "Error"})
 		if(!user) return res.status(404).send({message: "Usuario no encontrado"})
 		
-		//if(bcrypt.compareSync(req.body.password, user.password)) {
-		return res.status(200).send({token: service.createToken(user)})
-		//}else{
-		//	return res.status(404).send({message: "Datos invalidos"})
-		//}
+		//req.session.user = JSON.stringify(user)
+		//req.session.userId = user._id
+		//return res.status(200).send({token: service.createToken(user)})
 	})
+
 }
 
 
