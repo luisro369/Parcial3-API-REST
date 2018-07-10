@@ -35,8 +35,7 @@ function signIn(req, res){
 		return res.status(200).send({token: service.createToken(user._id), user: user})
 	})
 }
-
-
+	
 function getUser(req, res){
 	User.find().exec().then(doc => {console.log(doc); res.status(200).json(doc)}).catch(err =>{console.log(err); res.status(500).json({error: err})})
 }
